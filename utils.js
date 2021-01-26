@@ -1,5 +1,5 @@
 import pokemon from './data.js';
-import { clearPokeBall, incrementCaught, incrementSeen } from './localStorageUtils.js';
+import { clearPokeBall, getPokeBall, incrementCaught, incrementSeen } from './localStorageUtils.js';
 
 let numberOfTurns = 0;
 
@@ -30,6 +30,7 @@ export function setThreePokemon() {
     }
 
     const pokemonDiv = document.getElementById('pokemon');
+
     const pokeImg1 = renderPokeImg(firstPokemon);
     const pokeImg2 = renderPokeImg(secondPokemon);
     const pokeImg3 = renderPokeImg(thirdPokemon);
@@ -65,15 +66,32 @@ export function renderPokeImg(pokeItem) {
     image.classList.add('poke-image');
     image.addEventListener('click', () => {
         incrementCaught(pokeItem.id);
+        displayCaught();
 
-        if (incrementCaught === 1)
-            if (numberOfTurns < 10) {
-                setThreePokemon();
-            } else {
-                window.location = 'results';
-            }
+        setThreePokemon();
+        if (numberOfTurns === 10) window.location = 'results';
     });
 
     return image;
 }
 
+export function displayCaught() {
+    const header = document.querySelector('header');
+    header.innerHTML = '';
+    const image = document.createElement('img');
+    image.src = '../assets/pokeball.png';
+
+    const captured = document.createElement('p');
+
+    const encounteredPokemon = getPokeBall();
+
+    let caught = 0;
+    for (let pokemon of encounteredPokemon) {
+        if (pokemon.caught !== 0) {
+            caught += pokemon.caught;
+        }
+    }
+    captured.textContent = `${caught} Pokemon in your Pokeball`;
+
+    header.append(image, captured);
+}

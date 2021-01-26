@@ -462,5 +462,4 @@ export default [
         'shape': 'wings',
         'pokebase': 'pidgey',
         'pokedex': 'http://www.pokemon.com/us/pokedex/pidgey'
-    }
-]
+    }]
