@@ -66,6 +66,12 @@ h2 {
     font-weight: bold;
 }
 
+img .poke-img {
+    display: block;
+    height: 100px;
+    width: 100px;
+}
+
 .gutter-right {
     margin-right: 20px;
 }
