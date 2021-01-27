@@ -1,5 +1,6 @@
 const POKEBALL = 'POKEBALL';
 const defaultEmptyPokeBall = [];
+import pokemon from './data.js';
 import { findById } from './utils.js';
 
 export function getPokeBall() {
@@ -23,12 +24,13 @@ export function incrementSeen(id) {
     const poke = findById(id, ball);
 
     if (!poke) {
+        const dataListPokemon = findById(id, pokemon);
         const newInBall = {
+            name: dataListPokemon.pokebase,
             id: id,
             seen: 1,
             caught: 0,
         };
-
         ball.push(newInBall);
     } else {
         poke.seen++;
